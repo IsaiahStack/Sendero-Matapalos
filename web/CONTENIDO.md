@@ -54,6 +54,6 @@ del sendero, se usaron los informes del proyecto y las fuentes públicas de abaj
 - Confirmar las distancias de las rutas, el área y las cifras de biodiversidad.
 - Revisar los textos de «Qué es», «Dónde está» e «Importancia».
 - Opcional: agregar horario, contacto y cómo agendar visitas.
-- En el recorrido de Marzipano (`app-files/data.js`), los puntos de información todavía dicen «Text»
+- En el recorrido de Marzipano (`public/tour/data.js`), los puntos de información todavía dicen «Text»
   (Melponario, Invernadero, Laguna, Arboretum, Guácimo molenillo, Corteza de chivo) y las escenas
   Pt1–Pt36 no tienen nombre descriptivo.

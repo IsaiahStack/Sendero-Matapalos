@@ -12,7 +12,7 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Recorrido de Marzipano copiado por scripts/sync-tour.mjs
+    // Recorrido exportado de Marzipano Tool
     "public/tour/**",
   ]),
 ]);

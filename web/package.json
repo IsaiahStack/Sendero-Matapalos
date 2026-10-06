@@ -3,10 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "sync-tour": "node scripts/sync-tour.mjs",
-    "predev": "node scripts/sync-tour.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/sync-tour.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

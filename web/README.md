@@ -26,12 +26,10 @@ npm start
 
 ## Cómo se integra el recorrido de Marzipano
 
-El recorrido sigue viviendo en `../app-files` (lo que exporta Marzipano Tool) y **no se modifica**.
-Antes de `dev` y `build`, el script `scripts/sync-tour.mjs` lo copia a `public/tour/`
-(carpeta ignorada por git), y la página `/recorrido` lo muestra dentro de un `iframe`.
+El recorrido (lo que exporta Marzipano Tool) vive en `public/tour/`, y la página `/recorrido`
+lo muestra dentro de un `iframe`.
 
-- Si se vuelve a exportar el recorrido desde Marzipano, basta con reemplazar `../app-files`;
-  la próxima vez que se corra `npm run dev` o `npm run build` se copian solo los archivos que cambiaron.
+- Si se vuelve a exportar el recorrido desde Marzipano, basta con reemplazar el contenido de `public/tour/`.
 - En la copia, el script cambia los colores grises de las barras del visor por los verdes del sitio.
 
 ## Dónde editar los textos
