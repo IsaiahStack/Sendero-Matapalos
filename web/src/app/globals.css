@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+/* Temas: oscuro por defecto (bosque de noche) y claro (lino y arcilla).
+   El atributo data-tema en <html> lo pone el script de layout.tsx y el botón ThemeToggle. */
+@custom-variant claro (&:where([data-tema="claro"], [data-tema="claro"] *));
+@custom-variant oscuro (&:where([data-tema="oscuro"], [data-tema="oscuro"] *));
+
+:root,
+[data-tema="oscuro"] {
+  color-scheme: dark;
+  --fondo: #111a14;
+  --superficie: #17231b;
+  --superficie-2: #1e2d23;
+  --texto: #ebe5d3;
+  --texto-suave: #a5ae9c;
+  --linea: #2c3b30;
+  --acento: #b3cf8a;
+  --acento-2: #8fb06f;
+  --tierra: #d2a476;
+  --pie: #0b120d;
+  --grano: 0.07;
+}
+
+[data-tema="claro"] {
+  color-scheme: light;
+  --fondo: #e8e1cf;
+  --superficie: #efe9da;
+  --superficie-2: #ddd4bd;
+  --texto: #1d2a20;
+  --texto-suave: #54604e;
+  --linea: #cbc1a7;
+  --acento: #3d6b45;
+  --acento-2: #4a6d36;
+  --tierra: #94653a;
+  --pie: #182b1f;
+  --grano: 0.1;
+}
+
+@theme inline {
+  --color-fondo: var(--fondo);
+  --color-superficie: var(--superficie);
+  --color-superficie-2: var(--superficie-2);
+  --color-texto: var(--texto);
+  --color-texto-suave: var(--texto-suave);
+  --color-linea: var(--linea);
+  --color-acento: var(--acento);
+  --color-acento-2: var(--acento-2);
+  --color-tierra: var(--tierra);
+  --color-pie: var(--pie);
+
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+}
+
+/* Colores fijos para elementos sobre fotografía (iguales en ambos temas). */
+@theme {
+  --color-hoja: #b9d48f;
+  --color-hueso: #f1ecdf;
+  --color-noche: #0d1a12;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--fondo);
+  color: var(--texto);
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+::selection {
+  background: var(--acento);
+  color: var(--fondo);
+}
+
+:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 3px;
+}
+
+/* Fraunces con el eje SOFT: letras de remates suaves, más orgánicas. */
+.font-display {
+  font-variation-settings: "SOFT" 100;
+}
+
+@layer components {
+  /* Textura de papel/fibra sobre toda la página. */
+  .grano::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: var(--grano);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.45 0 0 0 0 0.35 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  /* Luz filtrada entre hojas: manchas suaves de luz verde y tierra. */
+  .luz-filtrada {
+    background-image:
+      radial-gradient(38rem 26rem at 88% 4%, color-mix(in oklab, var(--acento) 9%, transparent), transparent 70%),
+      radial-gradient(30rem 24rem at 4% 58%, color-mix(in oklab, var(--tierra) 8%, transparent), transparent 70%),
+      radial-gradient(26rem 20rem at 70% 96%, color-mix(in oklab, var(--acento) 6%, transparent), transparent 70%);
+  }
+
+  /* Forma de hoja: dos esquinas opuestas muy redondeadas. */
+  .forma-hoja {
+    border-radius: 2.75rem 0.75rem 2.75rem 0.75rem;
+  }
+
+  /* Contorno orgánico que respira lentamente. */
+  .forma-organica {
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+    animation: respirar 18s ease-in-out infinite alternate;
+  }
+
+  /* Subrayado de enlace como un tallo que crece. */
+  .enlace-tallo {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.5s ease;
+  }
+  .enlace-tallo:hover {
+    background-size: 100% 1px;
+  }
+
+  /* Capitular editorial. */
+  .capitular::first-letter {
+    float: left;
+    margin: 0.3rem 0.3rem 0 0;
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-size: 4.4rem;
+    line-height: 0.8;
+    color: var(--acento);
+    font-variation-settings: "SOFT" 100;
+  }
+}
+
+@keyframes respirar {
+  0% {
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+  }
+  50% {
+    border-radius: 70% 30% 46% 54% / 30% 39% 61% 70%;
+  }
+  100% {
+    border-radius: 50% 50% 34% 66% / 56% 68% 32% 44%;
+  }
+}
+
+@keyframes mecer {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
